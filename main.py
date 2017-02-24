@@ -52,8 +52,11 @@ class ViewPostHandler(Handler, webapp2.RequestHandler, Blog):
                                  error="",
                                  post=post)
 
-
-
+def get_posts(limit, offset):
+    posts = db.GqlQuery("SELECT * FROM Blog "
+                        "ORDER BY created DESC "
+                        "LIMIT limit OFFSET offset")
+    return posts
 
 class NewPost(Handler):
     # display newpost.html template
